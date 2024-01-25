@@ -12,3 +12,8 @@ opt-level = 3
 
 [dependencies]
 bevy = { version = "0.12.1", features = ["dynamic_linking"] }
+bevy-inspector-egui = "0.22.1"
+# bevy_mod_outline = "0.6.0"
+# bevy_simple_2d_outline = "0.1.1"
+# bevy_outline = "0.1.0"
+rand = "0.8.5"

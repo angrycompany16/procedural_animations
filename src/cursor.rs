@@ -1,3 +1,5 @@
+// TODO: turn into crate lol
+
 use bevy::{prelude::*, window::PrimaryWindow, math::vec2};
 
 pub struct CursorPlugin;
@@ -6,7 +8,7 @@ impl Plugin for CursorPlugin {
     fn build(&self, app: &mut App) {
         app
             .insert_resource(CursorWorldPos(vec2(0.0, 0.0)))
-            .add_systems(Startup, hide_cursor)
+            // .add_systems(Startup, hide_cursor)
             .add_systems(PreUpdate, set_cursor_world_pos)
             .add_systems(Update, update_cursor_sprite)
         ;
