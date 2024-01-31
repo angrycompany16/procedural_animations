@@ -68,19 +68,19 @@ pub fn spawn_crawler(
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<ColorMaterial>>,
 ) {
-    let vertebra_spacing = 30.0;
+    let vertebra_spacing = 7.5;
 
     spawn_head(
         HeadParams {
-            size: vec2(40.0, 40.0),
+            size: vec2(10.0, 10.0),
             position: vec2(0.0, vertebra_spacing),
 
-            turn_speed: 8.0,
+            turn_speed: 2.0,
             z_index: 2.0,
-            neck_width: 40.0,
+            neck_width: 10.0,
 
             vertebra_dist: vertebra_spacing,
-            move_speed: 350.0,
+            move_speed: 87.5,
             head_color: BODY_COLOR,
         }, 
         &mut commands, 
@@ -90,7 +90,7 @@ pub fn spawn_crawler(
     
     spawn_vertebra(
         BodyPartParams {
-            size: 50.0,
+            size: 12.5,
             position: vec2(0.0, 0.0),
         },
         &mut commands
@@ -98,14 +98,14 @@ pub fn spawn_crawler(
 
     spawn_vertebra_feet(
         FootBodyPartParams {
-            size: 60.0,
+            size: 15.0,
             position: vec2(0.0, -vertebra_spacing),
             
-            foot_radius: 15.0,
+            foot_radius: 3.75,
             foot_offset: vec2(vertebra_spacing * 2.0, vertebra_spacing * 2.5),
             step_length: vertebra_spacing * 4.0,
             foot_z_index: -1.0,
-            foot_speed: 18.0,
+            foot_speed: 4.5,
             foot_color: DARK_BODY_COLOR,
         },
         &mut commands, 
@@ -114,7 +114,7 @@ pub fn spawn_crawler(
     );
 
     let body_sizes: Vec<f32> = 
-        vec![50.0, 43.0, 40.0, 40.0, 43.0, 50.0];
+        vec![12.5, 10.75, 10.0, 10.0, 10.75, 12.5];
     
     for (i, size) in body_sizes.iter().enumerate() {
         spawn_vertebra(
@@ -128,14 +128,14 @@ pub fn spawn_crawler(
 
     spawn_vertebra_feet(
         FootBodyPartParams {
-            size: 60.0,
+            size: 15.0,
             position: vec2(0.0, -8.0 * vertebra_spacing),
             
-            foot_radius: 12.0,
+            foot_radius: 3.0,
             foot_offset: vec2(vertebra_spacing * 1.75, vertebra_spacing * 2.5),
             step_length: vertebra_spacing * 4.0,
             foot_z_index: -1.0,
-            foot_speed: 18.0,
+            foot_speed: 4.5,
             foot_color: DARK_BODY_COLOR,
         },
         &mut commands, 
@@ -144,7 +144,7 @@ pub fn spawn_crawler(
     );
 
     let tail_sizes: Vec<f32> = 
-        vec![50.0, 40.0, 33.0, 25.0, 20.0, 15.0, 11.0, 7.0, 4.0, 2.0];
+        vec![12.5, 10.0, 8.25, 6.25, 5.0, 15.0, 11.0, 7.0, 4.0, 2.0];
     
     for (i, size) in tail_sizes.iter().enumerate() {
         spawn_vertebra(
