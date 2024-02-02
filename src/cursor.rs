@@ -8,7 +8,7 @@ impl Plugin for CursorPlugin {
     fn build(&self, app: &mut App) {
         app
             .insert_resource(CursorWorldPos(vec2(0.0, 0.0)))
-            // .add_systems(Startup, hide_cursor)
+            .add_systems(Startup, hide_cursor)
             .add_systems(PreUpdate, set_cursor_world_pos)
             .add_systems(Update, update_cursor_sprite)
         ;
@@ -29,7 +29,7 @@ fn update_cursor_sprite (
     cursor_world_pos: Res<CursorWorldPos>
 ) {
     for mut transform in cursor_transform_q.iter_mut() {
-        transform.translation = cursor_world_pos.0.extend(1.0);     
+        transform.translation = cursor_world_pos.0.extend(1.0);
     }
 }
 
@@ -47,7 +47,8 @@ fn set_cursor_world_pos(
         .and_then(|cursor| camera.viewport_to_world(camera_transform, cursor))
         .map(|ray| ray.origin.truncate()
     ) {
-        cursor_world_pos.0 = mouse_pos;
+        // Stupid simple fix lol
+        cursor_world_pos.0 = mouse_pos / 4.0;
     }    
 }
 

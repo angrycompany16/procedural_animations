@@ -32,6 +32,9 @@ pub struct HeadParams {
     pub vertebra_dist: f32,
     pub move_speed: f32,
     pub head_color: Color,
+
+    pub eye_size: f32,
+    pub pupil_size: f32,
 }
 
 pub fn spawn_vertebra_feet(
@@ -137,9 +140,9 @@ pub fn spawn_head(
 ) {
     let eye_black_l = commands.spawn((
         MaterialMesh2dBundle {
-            mesh: meshes.add(shape::Circle::new(8.0).into()).into(),
+            mesh: meshes.add(shape::Circle::new(params.pupil_size).into()).into(),
             material: materials.add(ColorMaterial::from(Color::rgb(0.05, 0.05, 0.05))),
-            transform: Transform::from_translation(vec3(0.0, 7.0, 15.0)),
+            transform: Transform::from_translation(vec3(0.0, params.eye_size / 2.0, 15.0)),
             ..default()
         },
         Name::new("Eye_black")
@@ -147,7 +150,7 @@ pub fn spawn_head(
 
     let eye_l = commands.spawn((
         MaterialMesh2dBundle {
-            mesh: meshes.add(shape::Circle::new(15.0).into()).into(),
+            mesh: meshes.add(shape::Circle::new(params.eye_size).into()).into(),
             material: materials.add(ColorMaterial::from(Color::rgb(0.95, 0.95, 0.9))),
             transform: Transform {
                 translation: vec3(-params.size.x * 0.5, 0.0, 14.0),
@@ -164,9 +167,9 @@ pub fn spawn_head(
 
     let eye_black_r = commands.spawn((
         MaterialMesh2dBundle {
-            mesh: meshes.add(shape::Circle::new(8.0).into()).into(),
+            mesh: meshes.add(shape::Circle::new(params.pupil_size).into()).into(),
             material: materials.add(ColorMaterial::from(Color::rgb(0.05, 0.05, 0.05))),
-            transform: Transform::from_translation(vec3(0.0, 7.0, 15.0)),
+            transform: Transform::from_translation(vec3(0.0, params.eye_size / 2.0, 15.0)),
             ..default()
         },
         Name::new("Eye_black")
@@ -174,7 +177,7 @@ pub fn spawn_head(
 
     let eye_r = commands.spawn((
         MaterialMesh2dBundle {
-            mesh: meshes.add(shape::Circle::new(15.0).into()).into(),
+            mesh: meshes.add(shape::Circle::new(params.eye_size).into()).into(),
             material: materials.add(ColorMaterial::from(Color::rgb(0.95, 0.95, 0.9))),
             transform: Transform {
                 translation: vec3(params.size.x * 0.5, 0.0, 14.0),

@@ -14,36 +14,38 @@ use cursor::*;
 use render_shadows::*;
 
 const BACKGROUND_COLOR: Color = Color::rgb(0.75, 0.9, 0.8);
-const SHADOW_COLOR: Color = Color::rgb(0.1, 0.1, 0.1);
+const SHADOW_COLOR: Color = Color::rgb(0.0, 0.1, 0.1);
 
 fn main() {
     App::new()
-    .add_plugins((
-        DefaultPlugins.set(WindowPlugin {
-            primary_window: Some(Window {
-                resolution: WindowResolution::new(
-                    1200.0,
-                    800.0,
-                ),
+        .add_plugins((
+            DefaultPlugins.set(WindowPlugin {
+                primary_window: Some(Window {
+                    resolution: WindowResolution::new(
+                        1200.0,
+                        800.0,
+                    ),
+                    ..default()
+                }),
                 ..default()
-            }),
-            ..default()
-        }),
-        ShadowRenderTexturePlugin {
-            pixel_scale_factor: 4.0,
-
-            background_color: BACKGROUND_COLOR,
-            shadow_color: SHADOW_COLOR,
-
-            screen_width: 1200,
-            screen_height: 800,
+            })
+            .set(ImagePlugin::default_nearest()),
             
-            render_layer_index: 1,
-        },
-        TopDownCrawlerPlugin,
-        CursorPlugin,
-        WorldInspectorPlugin::default(),
-    ))
+            ShadowRenderTexturePlugin {
+                pixel_scale_factor: 4.0,
+
+                background_color: BACKGROUND_COLOR,
+                shadow_color: SHADOW_COLOR,
+
+                screen_width: 1200,
+                screen_height: 800,
+                
+                render_layer_index: 1,
+            },
+            TopDownCrawlerPlugin,
+            CursorPlugin,
+            // WorldInspectorPlugin::default(),
+        ))
         .insert_resource(ClearColor(BACKGROUND_COLOR))
         .insert_resource(Msaa::Off)
         .add_systems(Startup, setup)
@@ -57,7 +59,6 @@ fn setup(
     render_tex_layer: Res<RenderTexLayer>,
     // mut window_q: Query<&mut Window, With<PrimaryWindow>>,
 ) {
-    // println!("HEllo???");
     commands.spawn((
         Camera2dBundle::default(),
         RenderLayers::layer(**render_tex_layer),
@@ -66,7 +67,7 @@ fn setup(
 
     commands.spawn((
         MaterialMesh2dBundle {
-            mesh: meshes.add(shape::Circle::new(10.0).into()).into(),
+            mesh: meshes.add(shape::Circle::new(2.5).into()).into(),
             material: materials.add(ColorMaterial::from(Color::rgb(0.95, 0.95, 0.9))),
             ..default()
         },

@@ -82,6 +82,9 @@ pub fn spawn_crawler(
             vertebra_dist: vertebra_spacing,
             move_speed: 87.5,
             head_color: BODY_COLOR,
+
+            eye_size: 3.75,
+            pupil_size: 2.0,
         }, 
         &mut commands, 
         &mut meshes, 
@@ -105,7 +108,7 @@ pub fn spawn_crawler(
             foot_offset: vec2(vertebra_spacing * 2.0, vertebra_spacing * 2.5),
             step_length: vertebra_spacing * 4.0,
             foot_z_index: -1.0,
-            foot_speed: 4.5,
+            foot_speed: 18.0,
             foot_color: DARK_BODY_COLOR,
         },
         &mut commands, 
@@ -135,7 +138,7 @@ pub fn spawn_crawler(
             foot_offset: vec2(vertebra_spacing * 1.75, vertebra_spacing * 2.5),
             step_length: vertebra_spacing * 4.0,
             foot_z_index: -1.0,
-            foot_speed: 4.5,
+            foot_speed: 18.0,
             foot_color: DARK_BODY_COLOR,
         },
         &mut commands, 
@@ -144,7 +147,7 @@ pub fn spawn_crawler(
     );
 
     let tail_sizes: Vec<f32> = 
-        vec![12.5, 10.0, 8.25, 6.25, 5.0, 15.0, 11.0, 7.0, 4.0, 2.0];
+        vec![12.5, 10.0, 8.25, 6.25, 5.0, 3.75, 2.75, 1.75, 1.0, 0.5];
     
     for (i, size) in tail_sizes.iter().enumerate() {
         spawn_vertebra(
@@ -206,7 +209,7 @@ fn control_feet(
             else { continue; };
 
         let offset_pos_l = (vertebra_transform.translation
-            + vertebra_transform.left() * vertebra.foot_offset.x
+            + vertebra_transform.left() * vertebra.foot_offset.x            
             + vertebra_transform.up() * vertebra.foot_offset.y).truncate();
 
         // gizmos.circle_2d(offset_pos_l, 5.0, Color::RED);
