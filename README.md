@@ -2,4 +2,4 @@
 
 This repository contains a procedurally animated lizard, created using Rust and Bevy 
 
-![](./images/procedural_animation_lizard.gif)
+![](./images/proc_animation_lizard.gif)
